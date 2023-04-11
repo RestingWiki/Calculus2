@@ -1,11 +1,14 @@
 % Clear the screen
 clc;
 
+% Clear the graph
+clf;
+
 % Declare variables x, y
 syms x y;
 
 % Define the function F(x,y)
-f = x^4 + y^4 - 2*x^2 + 4*x*y - 2*y^2;
+f = exp(2*x)*(x+y^2+2*y);
 
 % Set up the system of equations
 sysOfEqn = [gradient(f) == 0];
@@ -22,12 +25,12 @@ fyy = diff(f, y, 2);
 crit = [];
 for i = 1:length(sol_Arr.x)
 
-    % Convert from vector to scalar
+    % Convert from vector to value
     x_scale = double(sol_Arr.x(i));
     y_scale = double(sol_Arr.y(i));
 
     % Upadate the old array with new x_scale, y_scale
-    crit = [crit; x_scale, y_scale];
+    crit = [crit; x_scale, y_scale]
 end   
 
 % Evaluate critical points for maxima, minima, saddle points
@@ -48,16 +51,26 @@ for i = 1:length(crit)
         elseif (double(delta) < 0)
             fprintf('(%f, %f) is a saddle point\n', x_scale, y_scale);
         elseif(double(delta) == 0)
-            fprintf('(%f, %f) is undetermined!\n', x_scale, y_scale); 
+            fprintf('The point (%f, %f) is undetermined!\n', x_scale, y_scale); 
         end
+
+    
     end
+    % Exit the loop after the first iteration
+    break;
+
 end
 
 % Skech the surface
 x_Axis = linspace(-10,10,100);
-y_Axis = linspace(-10,-10,100);
-[X,Y] = meshgrid(x_Axis,y_Axis);
-f
+y_Axis = linspace(-10,10,100);
+[X,Y] =  meshgrid(x_Axis,y_Axis);
+f_eval = matlabFunction(f);
 Z = f_eval(X, Y);
 
-surf(X,Y,Z);
+% Plot the surface within the boundary
+surf(X, Y, Z);   
+xlabel('x');
+ylabel('y');
+zlabel('z');
+

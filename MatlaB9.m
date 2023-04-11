@@ -8,7 +8,7 @@ clf;
 syms x y;
 
 % Define the function F(x,y)
-f = x^4 + y^4 - 2*x^2 + 4*x*y - 2*y^2;
+f = 2*x^4 + y^4 -x^2 - 2*y^2;
 
 % Set up the system of equations
 sysOfEqn = [gradient(f) == 0];
@@ -31,6 +31,7 @@ for i = 1:length(sol_Arr.x)
 
     % Upadate the old array with new x_scale, y_scale
     crit = [crit; x_scale, y_scale];
+    length(crit)
 end   
 
 % Evaluate critical points for maxima, minima, saddle points

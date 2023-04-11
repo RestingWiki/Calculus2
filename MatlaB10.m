@@ -8,7 +8,7 @@ clf;
 syms x y;
 
 % Define the function F(x,y)
-f = x^4 + y^4 - 2*x^2 + 4*x*y - 2*y^2;
+f = (x^2-2*y^2)*exp((x-y));
 
 % Set up the system of equations
 sysOfEqn = [gradient(f) == 0];
